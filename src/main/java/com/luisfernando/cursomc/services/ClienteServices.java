@@ -78,8 +78,11 @@ public class ClienteServices {
 	
 	public Cliente fromDTO(ClienteNewDTO objDTO) {
 		Cliente cli = new Cliente(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpfOuCnpj(), TipoCliente.toEnum(objDTO.getTipoCliente()));
+
 		Cidade cid = cidadeRepository.findById(objDTO.getCidadeId()).get();
+
 		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), cli, cid);
+
 		cli.getEndereco().add(end);
 		cli.getTelefones().add(objDTO.getTelefone1());
 		if(objDTO.getTelefone2() != null) {
